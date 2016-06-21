@@ -31,4 +31,8 @@ public class Squad {
 	public void setMorale(int n) {
 		this.morale = n; 
 	}
+	public Infantry getInfantry(Infantry i) {
+		return i;
+	}
+
 }
