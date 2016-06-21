@@ -11,17 +11,17 @@ import model.Infantry;
 //is based on that system.
 public class CombatController {
 	Random rand = new Random();
-	private Infantry in;
-	private Infantry in2; 
+	//private Infantry in;
+	//private Infantry in2; 
 	
-	public boolean p1hasInitiative() {
+	public boolean p1hasInitiative(Infantry in, Infantry in2) {
 		if(in.getInitiaitve() > in2.getInitiaitve()) {
 			return true;
 		}
 		else {return false;}
 	}
 	
-	public boolean p2hasInitiative() {
+	public boolean p2hasInitiative(Infantry i, Infantry i2) {
 		if(in2.getInitiaitve() > in.getInitiaitve()) {
 			return true;
 		}
@@ -29,7 +29,7 @@ public class CombatController {
 	}
 	
 	
-	public boolean isShootingHit() {
+	public boolean isShootingHit(Infantry in, Infantry in2) {
 		double hit = rand.nextInt(6); 
 		int toHit = 0;
 		if(in.getBS() == 1 || in2.getBS() == 1) {
@@ -54,7 +54,7 @@ public class CombatController {
 		else {return false;}
 	}
 	
-	public boolean isMeleeHit() {
+	public boolean isMeleeHit(Infantry in, Infantry in2) {
 		double hit = rand.nextInt(6);
 		int toHit = 0;
 		if(in2.getWS() > in.getWS() || in.getWS() > in2.getWS()) {
@@ -73,7 +73,7 @@ public class CombatController {
 		else {return false;}
 	}
 	
-	public boolean isWound() {
+	public boolean isWound(Infantry in, Infantry in2) {
 		//determining if an attack would cause a wound
 		int toWoundRoll = rand.nextInt(6);
 		int toWound = 0;
@@ -104,7 +104,7 @@ public class CombatController {
 		else {return false;} 
 }
 	
-	public boolean saveIgnored() {
+	public boolean saveIgnored(Infantry in, Infantry in2) {
 		//if a weapons AP value ignores a units armor. 
 		int ap = in.getWeapon().getAP();
 		int ap2 = in2.getWeapon().getAP();
@@ -117,31 +117,31 @@ public class CombatController {
 	
 	//These two methods could be combined into one. 
 	
-	public boolean isSaved() {
+	public boolean isSaved(Infantry in, Infantry in2) {
 		//if a unit gets its designated armor save
 		int saveRoll = rand.nextInt(6);
-		if(!saveIgnored() && saveRoll >= in.getSave()) {
+		if(!saveIgnored(in, in2) && saveRoll >= in.getSave()) {
 			return true;
 		}
 		else {return false;} 
 		
 	}
 	
-	public boolean takesWound() {
+	public boolean takesWound(Infantry in, Infantry in2) {
 		//if all of these methods pass and the saves do not, it is a wound 
-		if(isShootingHit()) {
-			if(isWound()) {
-				if(!saveIgnored()){
-					if(!isSaved()) {
+		if(isShootingHit(in, in2)) {
+			if(isWound(in, in2)) {
+				if(!saveIgnored(in, in2)){
+					if(!isSaved(in, in2)) {
 						return true;
 					}
 				}
 			}
 		}
-		else if (isMeleeHit()) {
-			if(isWound()) {
-				if(!saveIgnored()){
-					if(!isSaved()) {
+		else if (isMeleeHit(in, in2)) {
+			if(isWound(in, in2)) {
+				if(!saveIgnored(in, in2)){
+					if(!isSaved(in, in2)) {
 						return true;
 					}
 				}

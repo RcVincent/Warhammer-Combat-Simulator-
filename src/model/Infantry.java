@@ -79,5 +79,14 @@ public class Infantry {
 		this.weapon = weapon;
 	}
 	
-	
+	public void setStats(int ws, int bs, int s, int t, int w, int i, int a, int sa) {
+		this.setWS(ws);
+		this.setBS(bs);
+		this.setStrength(s);
+		this.setToughness(t);
+		this.setWounds(w);
+		this.setInitiaitve(i);
+		this.setAttacks(a);
+		this.setSave(sa);
+	}
 }
