@@ -29,22 +29,22 @@ public class CombatController {
 	}
 	
 	
-	public boolean isShootingHit(Infantry in, Infantry in2) {
+	public Boolean isShootingHit(Infantry in) {
 		double hit = rand.nextInt(6); 
 		int toHit = 0;
-		if(in.getBS() == 1 || in2.getBS() == 1) {
+		if(in.getBS() == 1) {
 			toHit = 6; 
 		}
-		else if(in.getBS() == 2 || in2.getBS() == 2) {
+		else if(in.getBS() == 2 ) {
 			toHit = 5; 
 		}
-		else if(in.getBS() == 3 || in2.getBS() == 3) {
+		else if(in.getBS() == 3 ) {
 			toHit = 4; 
 		}
-		else if(in.getBS() == 4 || in2.getBS() == 4) {
+		else if(in.getBS() == 4 ) {
 			toHit = 3; 
 		}
-		else if(in.getBS() >= 5 || in2.getBS() >= 5) {
+		else if(in.getBS() >= 5 ) {
 			toHit = 2; 
 		}
 		
@@ -117,10 +117,10 @@ public class CombatController {
 	
 	//These two methods could be combined into one. 
 	
-	public boolean isSaved(Infantry in, Infantry in2) {
+	public boolean isSaved(Infantry in) {
 		//if a unit gets its designated armor save
 		int saveRoll = rand.nextInt(6);
-		if(!saveIgnored(in, in2) && saveRoll >= in.getSave()) {
+		if(!saveIgnored(in, in) && saveRoll >= in.getSave()) {
 			return true;
 		}
 		else {return false;} 
@@ -129,7 +129,7 @@ public class CombatController {
 	
 	public boolean takesWound(Infantry in, Infantry in2) {
 		//if all of these methods pass and the saves do not, it is a wound 
-		if(isShootingHit(in, in2)) {
+		if(isShootingHit(in) || isShootingHit(in2)) {
 			if(isWound(in, in2)) {
 				if(!saveIgnored(in, in2)){
 					if(!isSaved(in, in2)) {
