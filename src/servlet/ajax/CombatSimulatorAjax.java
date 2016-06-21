@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.CombatController;
+
 public class CombatSimulatorAjax {
 	private static final long serialVersionUID = 1L;
 
@@ -22,11 +24,11 @@ public class CombatSimulatorAjax {
 	private void doRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// Use a controller to process the request
-		//GeneratorController controller = new GeneratorController();
+		CombatController controller = new CombatController();
 		//Double result = controller.start();
 		
 		// Send back a response
-		//resp.setContentType("text/plain");
+		resp.setContentType("text/plain");
 		//resp.getWriter().println(result.toString());
 	}
 }

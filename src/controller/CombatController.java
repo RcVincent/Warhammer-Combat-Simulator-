@@ -5,6 +5,10 @@ import java.util.Random;
 import model.Infantry;
 //import model.Vehicle;
 
+
+//It is important to note that the math is based on a 6 sided dice system
+//with a result of a 1 always being a "failure". The math/number logic here
+//is based on that system.
 public class CombatController {
 	Random rand = new Random();
 	private Infantry in;

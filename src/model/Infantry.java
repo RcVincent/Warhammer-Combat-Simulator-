@@ -3,15 +3,8 @@ package model;
 public class Infantry {
 	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Save;
 	private Weapon weapon;
-	public Infantry(int ws, int bs, int s, int t, int w, int i, int a, int sa) {
-		this.WS = ws;
-		this.BS = bs; 
-		this.Strength = s;
-		this.Toughness = t; 
-		this.Wounds = w;
-		this.Initiaitve = i;
-		this.Attacks = a;
-		this.Save = sa; 
+	public Infantry() {
+		
 	}
 
 	public int getWS() {
