@@ -22,5 +22,10 @@
 			<type>1</type>
 			<location>C:/Users/Ryan/Documents/Infantry.csv</location>
 		</link>
+		<link>
+			<name>src/projectdb/persist/res/Weapons.csv</name>
+			<type>1</type>
+			<location>C:/Users/Ryan/Documents/Weapons.csv</location>
+		</link>
 	</linkedResources>
 </projectDescription>
