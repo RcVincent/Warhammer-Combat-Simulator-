@@ -21,7 +21,7 @@ public class CombatController {
 		else {return false;}
 	}
 	
-	public boolean p2hasInitiative(Infantry i, Infantry i2) {
+	public boolean p2hasInitiative(Infantry in, Infantry in2) {
 		if(in2.getInitiaitve() > in.getInitiaitve()) {
 			return true;
 		}

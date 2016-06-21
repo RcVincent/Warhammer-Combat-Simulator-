@@ -9,31 +9,28 @@ import model.Infantry;
 
 public class CombatControllerTest {
 	CombatController c = new CombatController();
+	Infantry SpaceMarine = new Infantry();
+	Infantry NecronWarrior = new Infantry();
 	
 	@Before
 	public void setUp() {
-		
-		Infantry SpaceMarine = new Infantry();
-		Infantry NecronWarrior = new Infantry();
-		
 		SpaceMarine.setStats(4, 4, 4, 4, 1, 4, 1, 3);
 		NecronWarrior.setStats(4, 4, 4, 4, 1, 2, 1, 4);
-		
-		
+		//will add weapons later
 	}
 	
 	@Test
 	public void InitiativeTest() {
-		Boolean One = c.p1hasInitiative(SpaceMarine);
-		Boolean two = c.p2hasInitiative();
+		Boolean One = c.p1hasInitiative(SpaceMarine, NecronWarrior);
+		Boolean two = c.p2hasInitiative(SpaceMarine, NecronWarrior);
 		
-		assertTrue(One, true);
-		assertFalse(two, true);
+		assertTrue(One);
+		assertFalse(two);
 	}
 	
-	@Test
+	//@Test
 	public void ToHitTest() {
-		assertEquals(3, )
+			
 	}
 }
 
