@@ -6,17 +6,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Infantry;
+import model.Weapon;
 
 public class CombatControllerTest {
 	CombatController c = new CombatController();
 	Infantry SpaceMarine = new Infantry();
 	Infantry NecronWarrior = new Infantry();
-	
+	Weapon PowerSword = new Weapon(5, 3);
+	Weapon GaussFlux = new Weapon(4, 5); 
 	@Before
 	public void setUp() {
 		SpaceMarine.setStats(4, 4, 4, 4, 1, 4, 1, 3);
 		NecronWarrior.setStats(4, 4, 4, 4, 1, 2, 1, 4);
-		//will add weapons later
+		
+		//weapons added
+		SpaceMarine.setWeapon(PowerSword);
+		NecronWarrior.setWeapon(GaussFlux);
 	}
 	
 	@Test
@@ -56,18 +61,33 @@ public class CombatControllerTest {
 	
 	@Test
 	public void isSavedTest() {
-		Boolean one = c.isSaved(SpaceMarine);
-		Boolean two = c.isSaved(NecronWarrior);
+		Boolean one = c.isSaved(SpaceMarine, NecronWarrior);
+		Boolean two = c.isSaved(NecronWarrior, SpaceMarine);
 		
 		assertTrue(one);
 		assertFalse(two);
 	}
 	
-	public void takesWoundTest() {
-		Boolean one = c.takesWound(SpaceMarine);
-		Boolean two = c.takesWound(NecronWarrior);
+	@Test
+	public void saveIgnoredTest() {
+		Boolean one = c.p1saveIgnored(SpaceMarine, NecronWarrior);
+		Boolean two = c.p2saveIgnored(NecronWarrior, SpaceMarine);
+		
+		assertTrue(one);
+		assertFalse(two); 
 	}
 	
+	@Test
+	public void takesWoundTest() {
+		Boolean one = c.takesWound(SpaceMarine, NecronWarrior);
+		Boolean two = c.takesWound(NecronWarrior, SpaceMarine);
+		
+		assertTrue(two);
+		assertFalse(one); 
+	}
+	
+	
+	//YYYYYAAAAAAAYYYYYYYY i think im done with this test.....
 }
 
 

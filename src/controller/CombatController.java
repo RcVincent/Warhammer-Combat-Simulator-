@@ -104,23 +104,31 @@ public class CombatController {
 		else {return false;} 
 }
 	
-	public boolean saveIgnored(Infantry in, Infantry in2) {
+	public boolean p1saveIgnored(Infantry in, Infantry in2) {
 		//if a weapons AP value ignores a units armor. 
 		int ap = in.getWeapon().getAP();
-		int ap2 = in2.getWeapon().getAP();
 		
-		if(ap <= in2.getSave() || ap2 <= in.getSave()) {
+		if(ap <= in2.getSave()) {
 			return true;
 		}
 		else {return false;}
 	}
 	
+	public boolean p2saveIgnored(Infantry in2, Infantry in1) {
+		//if a weapons AP value ignores a units armor. 
+		int ap2 = in2.getWeapon().getAP();
+		
+		if(ap2 <= in1.getSave()) {
+			return true;
+		}
+		else {return false;}
+	}
 	//These two methods could be combined into one. 
 	
-	public boolean isSaved(Infantry in) {
+	public boolean isSaved(Infantry in, Infantry in2) {
 		//if a unit gets its designated armor save
 		int saveRoll = rand.nextInt(6);
-		if(!saveIgnored(in, in) && saveRoll >= in.getSave()) {
+		if(!p1saveIgnored(in, in2) && saveRoll >= in.getSave()) {
 			return true;
 		}
 		else {return false;} 
@@ -131,7 +139,7 @@ public class CombatController {
 		//if all of these methods pass and the saves do not, it is a wound 
 		if(isShootingHit(in) || isShootingHit(in2)) {
 			if(isWound(in, in2)) {
-				if(!saveIgnored(in, in2)){
+				if(!p1saveIgnored(in, in2) || !p2saveIgnored(in2, in)){
 					if(!isSaved(in, in2)) {
 						return true;
 					}
@@ -140,7 +148,7 @@ public class CombatController {
 		}
 		else if (isMeleeHit(in, in2)) {
 			if(isWound(in, in2)) {
-				if(!saveIgnored(in, in2)){
+				if(!p1saveIgnored(in, in2) ||!p2saveIgnored(in2, in) ){
 					if(!isSaved(in, in2)) {
 						return true;
 					}

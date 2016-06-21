@@ -89,4 +89,6 @@ public class Infantry {
 		this.setAttacks(a);
 		this.setSave(sa);
 	}
+	
+	
 }
