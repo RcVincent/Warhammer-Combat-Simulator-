@@ -16,8 +16,8 @@ public class CombatControllerTest {
 	Weapon GaussFlux = new Weapon(4, 5); 
 	@Before
 	public void setUp() {
-		SpaceMarine.setStats(4, 4, 4, 4, 1, 4, 1, 3);
-		NecronWarrior.setStats(4, 4, 4, 4, 1, 2, 1, 4);
+		SpaceMarine.setStats(4, 4, 4, 4, 1, 4, 1, 9, 3);
+		NecronWarrior.setStats(4, 4, 4, 4, 1, 2, 1, 10, 4);
 		
 		//weapons added
 		SpaceMarine.setWeapon(PowerSword);
@@ -86,8 +86,16 @@ public class CombatControllerTest {
 		assertFalse(one); 
 	}
 	
-	
+	@Test
+	public void leaderShipTest() { 
+		Boolean one = c.isRunning(SpaceMarine, NecronWarrior);
+		Boolean two = c.isRunning(NecronWarrior, SpaceMarine);
+		assertFalse(one);
+		assertFalse(two);
+	}
 	//YYYYYAAAAAAAYYYYYYYY i think im done with this test.....
+	
+	
 }
 
 
