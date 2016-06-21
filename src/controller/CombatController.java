@@ -159,5 +159,20 @@ public class CombatController {
 		
 		//if the method runs this far its a false result
 		return false;
+		
+		
+		}
+		//The only check done on a 2D6 system
+	public boolean isRunning(Infantry in, Infantry in2) {
+		int leadershipRoll = rand.nextInt(12);
+		int ld = 0;
+		if(takesWound(in, in2)) {
+			 ld = in.getLeadership();
+		}
+		if(leadershipRoll > ld) {
+			return true;
+		}
+		else {return false;}
 	}
+
 }

@@ -1,7 +1,7 @@
 package model;
 
 public class Infantry {
-	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Save;
+	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, leadership, Save;
 	private Weapon weapon;
 	public Infantry() {
 		
@@ -79,7 +79,7 @@ public class Infantry {
 		this.weapon = weapon;
 	}
 	
-	public void setStats(int ws, int bs, int s, int t, int w, int i, int a, int sa) {
+	public void setStats(int ws, int bs, int s, int t, int w, int i, int a, int ld, int sa) {
 		this.setWS(ws);
 		this.setBS(bs);
 		this.setStrength(s);
@@ -87,7 +87,16 @@ public class Infantry {
 		this.setWounds(w);
 		this.setInitiaitve(i);
 		this.setAttacks(a);
+		this.setLeadership(ld);
 		this.setSave(sa);
+	}
+
+	public int getLeadership() {
+		return leadership;
+	}
+
+	public void setLeadership(int leadership) {
+		this.leadership = leadership;
 	}
 	
 	
