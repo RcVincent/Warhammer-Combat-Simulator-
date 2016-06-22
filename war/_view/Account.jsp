@@ -39,6 +39,30 @@
 				<td>${lastname}</td>
 			</tr>
 		
+			<tr>
+				<td class = "label"> Username: </td>
+				<td>${username} </td>
+			</tr>
+			
+			<tr> 
+				<td class = "label"> Email: </td>
+				<td> ${email}</td>
+			</tr>
+			
+			<tr>
+				<td class = "label">Account Type: </td>
+				<td>$<{AccountType}</td>
+			</tr>
+			<tr> 
+				<form action = "${pageContext.servletContext.contextPath}/Homepage" method = "get">
+				<td><input type = "Submit" name = "submit" value = "Click to go home brother"/> </td>
+				</form>
+			</tr>
+			
+			<tr>
+				<form action = "${pageContext.servletContext.contextPath}/ChangeUsername" method = "get">
+				<td><input type = "Submit" name = "submit" value = "Click to change your username brother"/> </td>
+				</form>
 		</table>
 		</div>
 	</body>
