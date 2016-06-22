@@ -42,15 +42,32 @@ td.label {
 			<table>
 				<tr>
 					<td class = "label"> First name: </td>
-					<td><input type = "text" name = "firstname" size = "12" value = "${username}" required/> </td>
+					<td><input type = "text" name = "Fname" size = "12" value = "${Fname}" required/> </td>
 				</tr>
-			
+				<tr>
+					<td class = "label"> Last Name: </td>
+					<td><input type = "text" name = "Lname" size = "12" value = "${Lname }"/> </td>
+				</tr>
+				<tr>
+					<td class = "label"> Username: </td>
+					<td><input type = "text" name = "username" size = "12" value = "${username}"/> </td>
+				</tr>
+				<tr>
+					<td class = "label"> Password: </td>
+					<td> <input type = "password" name = "password" size = "12" value = "${password}"> </td>
+				</tr>
+				<tr>
+					<td class = "label"> email address: </td>
+					<td><input type = "email" name = email size = "12" value = "${email}" /> </td>
+				</tr>
+				<tr>
+					<td class = "label"> Account Type: </td>
+					<td><input type = "radio" name = "AccountType" value = "user" checked> User</td>
+					<td><input type = "radio" name = "AccountType" value = "admin" checked> Admin</td>
+				</tr>
 			</table>
 			<input type = "Submit" name = "submit" value = "Create Account"/>
-		</div>
-	
-	
-	
+		</div>			
 	</form>
 </body>
 </html>
