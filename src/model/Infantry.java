@@ -1,7 +1,7 @@
 package model;
 
 public class Infantry {
-	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, leadership, Save;
+	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Leadership, Save;
 	private Weapon weapon;
 	public Infantry() {
 		
@@ -92,11 +92,11 @@ public class Infantry {
 	}
 
 	public int getLeadership() {
-		return leadership;
+		return Leadership;
 	}
 
 	public void setLeadership(int leadership) {
-		this.leadership = leadership;
+		this.Leadership = leadership;
 	}
 	
 	
