@@ -19,7 +19,7 @@ public class InitialData {
 			// auto-generated primary key for table User
 			Integer UserId = 1;
 			while (true) {
-				List<String> tuple = readUser.next();
+				List<Integer> tuple = readUser.next();
 				if (tuple == null) {
 					break;
 				}
@@ -51,11 +51,11 @@ public class InitialData {
 		try {
 			Integer InfantryId = 1;
 			while(true){		
-				List<String> tuple = readInfantry.next();
+				List<Integer> tuple = readInfantry.next();
 				if(tuple == null) {
 					break;
 				}
-				Iterator<String> i = tuple.iterator();
+				Iterator<Integer> i = tuple.iterator();
 				Infantry infantry = new Infantry();
 				infantry.setWS(i.next());
 				infantry.setBS(i.next());
@@ -82,12 +82,12 @@ public class InitialData {
 		try {
 			Integer WeaponId = 1;
 			while(true) {
-				List<String> tuple = readWeapons.next();
+				List<Integer> tuple = readWeapons.next();
 				if(tuple == null) {
 					break;
 				}
 				
-				Iterator<String> i = tuple.iterator();
+				Iterator<Integer> i = tuple.iterator();
 				Weapon w = new Weapon();
 				w.setStrength(i.next());
 				w.setAP(i.next());
