@@ -1,28 +1,27 @@
 package model;
 
 public class Weapon {
-	private int Strength;
-	private int AP;
+	private String Strength;
+	private String AP;
 	
-	public Weapon(int s, int ap) {
-		this.setStrength(s);
-		this.setAP(ap);
+	public Weapon() {
+		
 	}
 
-	public int getStrength() {
+	public String getStrength() {
 		return Strength;
 	}
 
-	public void setStrength(int strength) {
-		Strength = strength;
+	public void setStrength(String string) {
+		Strength = string;
 	}
 
-	public int getAP() {
+	public String getAP() {
 		return AP;
 	}
 
-	public void setAP(int aP) {
-		AP = aP;
+	public void setAP(String string) {
+		AP = string;
 	}
 	
 	
