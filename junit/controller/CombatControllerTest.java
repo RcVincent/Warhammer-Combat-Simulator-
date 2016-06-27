@@ -12,13 +12,18 @@ public class CombatControllerTest {
 	CombatController c = new CombatController();
 	Infantry SpaceMarine = new Infantry();
 	Infantry NecronWarrior = new Infantry();
-	Weapon PowerSword = new Weapon(5, 3);
-	Weapon GaussFlux = new Weapon(4, 5); 
+	Weapon PowerSword = new Weapon();
+	Weapon GaussFlux = new Weapon(); 
+	
 	@Before
 	public void setUp() {
 		SpaceMarine.setStats(4, 4, 4, 4, 1, 4, 1, 9, 3);
 		NecronWarrior.setStats(4, 4, 4, 4, 1, 2, 1, 10, 4);
 		
+		PowerSword.setStrength(5);
+		PowerSword.setAP(3);
+		GaussFlux.setStrength(4);
+		GaussFlux.setAP(5);
 		//weapons added
 		SpaceMarine.setWeapon(PowerSword);
 		NecronWarrior.setWeapon(GaussFlux);
