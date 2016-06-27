@@ -1,75 +1,74 @@
 package model;
 
 public class Infantry {
-	private String WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Leadership;
-	String Save;
+	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Leadership, Save;
 	private Weapon weapon;
 	public Infantry() {
 		
 	}
 
-	public String getWS() {
+	public int getWS() {
 		return WS;
 	}
 
-	public void setWS(String string) {
-		WS = string;
+	public void setWS(int wS) {
+		WS = wS;
 	}
 
-	public String getBS() {
+	public int getBS() {
 		return BS;
 	}
 
-	public void setBS(String string) {
-		BS = string;
+	public void setBS(int bS) {
+		BS = bS;
 	}
 
-	public String getStrength() {
+	public int getStrength() {
 		return Strength;
 	}
 
-	public void setStrength(String string) {
-		Strength = string;
+	public void setStrength(int strength) {
+		Strength = strength;
 	}
 
-	public String getToughness() {
+	public int getToughness() {
 		return Toughness;
 	}
 
-	public void setToughness(String string) {
-		Toughness = string;
+	public void setToughness(int toughness) {
+		Toughness = toughness;
 	}
 
-	public String getWounds() {
+	public int getWounds() {
 		return Wounds;
 	}
 
-	public void setWounds(String string) {
-		Wounds = string;
+	public void setWounds(int wounds) {
+		Wounds = wounds;
 	}
 
-	public String getInitiaitve() {
+	public int getInitiaitve() {
 		return Initiaitve;
 	}
 
-	public void setInitiaitve(String string) {
-		Initiaitve = string;
+	public void setInitiaitve(int initiaitve) {
+		Initiaitve = initiaitve;
 	}
 
-	public String getAttacks() {
+	public int getAttacks() {
 		return Attacks;
 	}
 
-	public void setAttacks(String string) {
-		Attacks = string;
+	public void setAttacks(int attacks) {
+		Attacks = attacks;
 	}
 
-	public String getSave() {
+	public int getSave() {
 		return Save;
 	}
 
-	public void setSave(String string) {
-		Save = string;
+	public void setSave(int save) {
+		Save = save;
 	}
 	
 	public Weapon getWeapon() {
@@ -80,7 +79,7 @@ public class Infantry {
 		this.weapon = weapon;
 	}
 	
-	public void setStats(String ws, String bs, String s, String t, String w, String i, String a, String ld, String sa) {
+	public void setStats(int ws, int bs, int s, int t, int w, int i, int a, int ld, int sa) {
 		this.setWS(ws);
 		this.setBS(bs);
 		this.setStrength(s);
@@ -92,12 +91,12 @@ public class Infantry {
 		this.setSave(sa);
 	}
 
-	public String getLeadership() {
+	public int getLeadership() {
 		return Leadership;
 	}
 
-	public void setLeadership(String string) {
-		this.Leadership = string;
+	public void setLeadership(int leadership) {
+		this.Leadership = leadership;
 	}
 	
 	

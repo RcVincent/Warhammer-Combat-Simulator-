@@ -1,27 +1,27 @@
 package model;
 
 public class Weapon {
-	private String Strength;
-	private String AP;
+	private int Strength;
+	private int AP;
 	
 	public Weapon() {
 		
 	}
 
-	public String getStrength() {
+	public int getStrength() {
 		return Strength;
 	}
 
-	public void setStrength(String string) {
-		Strength = string;
+	public void setStrength(int strength) {
+		Strength = strength;
 	}
 
-	public String getAP() {
+	public int getAP() {
 		return AP;
 	}
 
-	public void setAP(String string) {
-		AP = string;
+	public void setAP(int aP) {
+		AP = aP;
 	}
 	
 	
