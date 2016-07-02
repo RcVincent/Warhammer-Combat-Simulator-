@@ -19,7 +19,7 @@ public class InitialData {
 			// auto-generated primary key for table User
 			Integer UserId = 1;
 			while (true) {
-				List<Integer> tuple = readUser.next();
+				List<String> tuple = readUser.next();
 				if (tuple == null) {
 					break;
 				}
@@ -44,6 +44,7 @@ public class InitialData {
 		}
 	}
 	
+	/*
 	public static List<Infantry> getInfantry() throws IOException {
 		List<Infantry> InfantryList = new ArrayList<Infantry>();
 		ReadCSV readInfantry = new ReadCSV("Infantry.csv");
@@ -51,11 +52,11 @@ public class InitialData {
 		try {
 			Integer InfantryId = 1;
 			while(true){		
-				List<Integer> tuple = readInfantry.next();
+				List<String> tuple = readInfantry.next();
 				if(tuple == null) {
 					break;
 				}
-				Iterator<Integer> i = tuple.iterator();
+				Iterator<String> i = tuple.iterator();
 				Infantry infantry = new Infantry();
 				infantry.setWS(i.next());
 				infantry.setBS(i.next());
@@ -82,12 +83,12 @@ public class InitialData {
 		try {
 			Integer WeaponId = 1;
 			while(true) {
-				List<Integer> tuple = readWeapons.next();
+				List<String> tuple = readWeapons.next();
 				if(tuple == null) {
 					break;
 				}
 				
-				Iterator<Integer> i = tuple.iterator();
+				Iterator<String> i = tuple.iterator();
 				Weapon w = new Weapon();
 				w.setStrength(i.next());
 				w.setAP(i.next());
@@ -99,5 +100,5 @@ public class InitialData {
 			readWeapons.close();
 		}
 	}
-	
+	*/
 }

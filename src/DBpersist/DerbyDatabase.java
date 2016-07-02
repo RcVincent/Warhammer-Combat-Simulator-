@@ -89,6 +89,7 @@ public class DerbyDatabase implements IDatabase {
 				}
 			});
 		}
+		
 		//*************************************************
 		//match user name with password for authentication
 		//*************************************************
@@ -143,10 +144,10 @@ public class DerbyDatabase implements IDatabase {
 		//********************************
 		//Delete a user from the database
 		//********************************
-		@Override
+		
 		public List<User> DeleteUserFromDatabase(final String name, final String pswd) {
 			return executeTransaction(new Transaction<List<User>>() {
-				@Override
+				
 				public List<User> execute(Connection conn) throws SQLException {
 					PreparedStatement stmt = null;
 					PreparedStatement stmt2 = null; 

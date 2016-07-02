@@ -23,6 +23,5 @@ public class Weapon {
 	public void setAP(int aP) {
 		AP = aP;
 	}
-	
-	
+
 }

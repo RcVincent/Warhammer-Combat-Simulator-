@@ -20,12 +20,12 @@ public class ReadCSV implements Closeable {
 		this.reader = new BufferedReader(new InputStreamReader(in));
 	}
 	
-	public List<Integer> next() throws IOException {
+	public List<String> next() throws IOException {
 		String line = reader.readLine();
 		if (line == null) {
 			return null;
 		}
-		List<Integer> tuple = new ArrayList<Integer>();
+		List<String> tuple = new ArrayList<String>();
 		StringTokenizer tok = new StringTokenizer(line, ",");
 		while (tok.hasMoreTokens()) {
 			tuple.add(tok.nextToken().trim());
