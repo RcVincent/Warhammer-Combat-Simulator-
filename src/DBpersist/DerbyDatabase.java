@@ -10,7 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import edu.ycp.cs320.lab03.DBpersist.DBUtil;
+import edu.ycp.cs320.lab03.DBpersist.DerbyDatabase.Transaction;
 import model.User;
 
 public class DerbyDatabase implements IDatabase {
@@ -337,10 +338,6 @@ public class DerbyDatabase implements IDatabase {
 				@Override
 				public Boolean execute(Connection conn) throws SQLException {
 					PreparedStatement stmt1 = null;
-					PreparedStatement stmt2 = null;
-					PreparedStatement stmt3 = null;
-					PreparedStatement stmt4 = null;
-					PreparedStatement stmt5 = null;
 
 					try {
 						stmt1 = conn.prepareStatement(
@@ -356,68 +353,16 @@ public class DerbyDatabase implements IDatabase {
 										")"
 								);	
 						stmt1.executeUpdate();
-
-						//the users referenced in the user_id constraing are owners
-						stmt2 = conn.prepareStatement(
-								"create table restaurants (" +
-										"	rest_id integer primary key " +
-										"		generated always as identity (start with 1, increment by 1), " +
-										"	user_id integer constraint user_id references users, " +
-										"	rest_name varchar(40),"    +
-										"	rest_address varchar(90)," +
-										"   rest_city varchar(30),"	   +
-										"   rest_zipcode varchar(10)"  +
-										")"
-								);
-						stmt2.executeUpdate();
-						//the following tables do not use a constraint to avoid overlapping foreign keys
-						stmt3 = conn.prepareStatement(
-								" create table menu (" +
-										" menu_id integer primary key " +
-										" 		generated always as identity (start with 1, increment by 1), " +
-										" rest_id integer, "   +
-										" menu_item varchar(40), "      +
-										" menu_price varchar(10)"      +
-										")"
-								);
-						stmt3.executeUpdate();
-						//order is attached to a patron
-						stmt4 = conn.prepareStatement(
-								" create table orders (" +
-										" order_id integer primary key " +
-										" 		generated always as identity (start with 1, increment by 1), " +
-										" patron_id integer, "    +
-										" rest_name varchar(40)," +
-										" order_number integer, " +
-										" item varchar(40), "	  +
-										" quantity integer,"	  +
-										" price varchar(10),"		  +
-										" status varchar(40)"     +
-										")"
-								);
-						stmt4.executeUpdate();
-						stmt5 = conn.prepareStatement(
-								" create table favRests (" +
-										" favRestId integer primary key " +
-										" 		generated always as identity (start with 1, increment by 1), " +
-										" patron_id integer, "   +
-										" rest_name varchar(40)" +
-										")"
-								);
-						stmt5.executeUpdate();
-
 						return true;
 					} finally {
 						DBUtil.closeQuietly(stmt1);
-						DBUtil.closeQuietly(stmt2);
-						DBUtil.closeQuietly(stmt3);
-						DBUtil.closeQuietly(stmt4);
-						DBUtil.closeQuietly(stmt5);
+						
 					}
 				}
 			});
 		}
 		
+
 		//loading initial data for basic website navigation
 		public void loadInitialData() {
 			executeTransaction(new Transaction<Boolean>() {

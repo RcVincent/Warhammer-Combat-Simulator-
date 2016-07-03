@@ -3,6 +3,7 @@ package model;
 public class Vehicle {
 	private int WS, BS, S, FR, SI, R, HP; 
 	private Weapon weapon;
+	private String name;
 	public Vehicle(int ws, int bs, int s, int fr, int si, int r, int hp){
 		this.setWS(ws);
 		this.setBS(bs);
@@ -75,5 +76,13 @@ public class Vehicle {
 
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
