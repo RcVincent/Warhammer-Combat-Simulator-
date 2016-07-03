@@ -3,6 +3,7 @@ package model;
 public class Infantry {
 	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Leadership, Save;
 	private Weapon weapon;
+	private String name;
 	public Infantry() {
 		
 	}
@@ -97,6 +98,14 @@ public class Infantry {
 
 	public void setLeadership(int leadership) {
 		this.Leadership = leadership;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
