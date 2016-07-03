@@ -10,8 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ycp.cs320.lab03.DBpersist.DBUtil;
-import edu.ycp.cs320.lab03.DBpersist.DerbyDatabase.Transaction;
+import DBpersist.DBUtil;
+import DBpersist.DerbyDatabase.Transaction;
+import DBpersist.PersistenceException;
 import model.User;
 
 public class DerbyDatabase implements IDatabase {
@@ -311,6 +312,50 @@ public class DerbyDatabase implements IDatabase {
 				}
 			});
 		}
+		
+		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
+			try {
+				return doExecuteTransaction(txn);
+			} catch (SQLException e) {
+				throw new PersistenceException("Transaction failed", e);
+			}
+		}
+
+		public<ResultType> ResultType doExecuteTransaction(Transaction<ResultType> txn) throws SQLException {
+			Connection conn = connect();
+
+			try {
+				int numAttempts = 0;
+				boolean success = false;
+				ResultType result = null;
+
+				while (!success && numAttempts < MAX_ATTEMPTS) {
+					try {
+						result = txn.execute(conn);
+						conn.commit();
+						success = true;
+					} catch (SQLException e) {
+						if (e.getSQLState() != null && e.getSQLState().equals("41000")) {
+							// Deadlock: retry (unless max retry count has been reached)
+							numAttempts++;
+						} else {
+							// Some other kind of SQLException
+							throw e;
+						}
+					}
+				}
+
+				if (!success) {
+					throw new SQLException("Transaction failed (too many retries)");
+				}
+
+				// Success!
+				return result;
+			} finally {
+				DBUtil.closeQuietly(conn);
+			}
+		}
+
 		private Connection connect() throws SQLException {
 			Connection conn = DriverManager.getConnection("jdbc:derby:H:/workspace.newDBarea;create=true");
 
