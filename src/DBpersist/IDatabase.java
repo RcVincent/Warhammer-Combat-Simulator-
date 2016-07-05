@@ -1,11 +1,12 @@
 package DBpersist;
 import java.util.List;
 
+import model.Favorites;
 import model.User;
 
 
 public interface IDatabase {
-List<User> matchUsernameWithPassword(String name);
+	List<User> matchUsernameWithPassword(String name);
 	
     List<User> getAccountInfo(String name);
 
@@ -14,4 +15,8 @@ List<User> matchUsernameWithPassword(String name);
 	List<User> DeleteUserFromDatabase(String name, String pswd);
 
 	List<User> changeUsername(String name, String newName, String pswd);
+	
+	
+
+	List<Favorites> getFromInfantryFavorites(Integer userId);
 }

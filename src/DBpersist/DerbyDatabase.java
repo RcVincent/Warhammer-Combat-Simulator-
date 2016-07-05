@@ -12,6 +12,7 @@ import java.util.List;
 
 import DBpersist.DBUtil;
 import DBpersist.DerbyDatabase.Transaction;
+import model.Favorites;
 import DBpersist.PersistenceException;
 import model.User;
 
@@ -313,6 +314,52 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
+		public List<Favorites> getFromInfantryFavorites(final Integer userId) {
+			return executeTransaction(new Transaction<List<Favorites>>() {
+				@Override
+				public List<Favorites> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt2 = conn.prepareStatement(
+								"select * " +
+										" from favoriteInfantry " +
+										" where patron_id = ?"
+								);
+						stmt2.setInt(1, userId);
+						
+						resultSet = stmt2.executeQuery();
+
+						// for testing that a result was returned
+						Boolean found = false;
+						List<Favorites> result = new ArrayList<Favorites>();
+						while (resultSet.next()) {
+							found = true;
+							Favorites u = new Favorites();
+							loadFavoriteRest(u, resultSet, 1);
+							result.add(u);
+						}
+
+						// check if the title was found
+						if (!found) {
+							System.out.println("<> was not found in the Restaurants table");
+						}
+
+						return result;
+
+
+					} finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+						DBUtil.closeQuietly(stmt2);
+					}
+				}
+			});
+		}
+		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
 				return doExecuteTransaction(txn);
@@ -377,13 +424,21 @@ public class DerbyDatabase implements IDatabase {
 			user.setLname(resultSet.getString(index++));
 		}
 		
+		private void loadFavoriteRest(Favorites fav, ResultSet resultSet, int index) throws SQLException {
+			fav.setFavID(resultSet.getInt(index++));;
+			fav.setUserID(resultSet.getInt(index++));
+			fav.setName(resultSet.getString(index++));
+		}
+		
 		//creating the tables
 		public void createTables() {
 			executeTransaction(new Transaction<Boolean>() {
 				@Override
 				public Boolean execute(Connection conn) throws SQLException {
 					PreparedStatement stmt1 = null;
-
+					PreparedStatement stmt2 = null;
+					PreparedStatement stmt3 = null;
+					
 					try {
 						stmt1 = conn.prepareStatement(
 								"create table users (" +
@@ -398,10 +453,37 @@ public class DerbyDatabase implements IDatabase {
 										")"
 								);	
 						stmt1.executeUpdate();
+						
+						//Create the favorites Table
+						stmt2 = conn.prepareStatement(
+								" create table favoriteInfantry (" +
+										" favInfantryId integer primary key " +
+										" 		generated always as identity (start with 1, increment by 1), " +
+										" user_id integer, "   +
+										" infantryname varchar(40)" +
+										")"
+								);
+						
+						stmt2.executeUpdate();
+						
+						//Create the Armory 
+						stmt3 = conn.prepareStatement(
+								" create table menu (" +
+										" armory_id integer primary key " +
+										" 		generated always as identity (start with 1, increment by 1), " +
+										" faction_id integer, "   +
+										" armory_item varchar(40), "      +
+										")"
+								);
+						
+						stmt3.executeUpdate();
+						
+						
 						return true;
 					} finally {
 						DBUtil.closeQuietly(stmt1);
-						
+						DBUtil.closeQuietly(stmt2);
+						DBUtil.closeQuietly(stmt3);
 					}
 				}
 			});

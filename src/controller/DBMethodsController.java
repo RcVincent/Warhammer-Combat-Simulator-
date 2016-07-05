@@ -50,7 +50,7 @@ public class DBMethodsController {
 		for (User user : userList) {
 			users.add(user);
 		}
-	// return authors for this title
+
 	return users;
 	}
 
