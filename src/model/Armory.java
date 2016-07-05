@@ -9,6 +9,7 @@ public class Armory {
 	private String weapon;
 	private int weaponID;
 	private int ArmoryID;
+	private int FactionID;
 	private TreeMap<String, Double> mapper = new TreeMap<String, Double>();
 	
 	public void addToArmory(String weapon, Double quantity) {
@@ -44,6 +45,14 @@ public class Armory {
 
 	public void setArmoryID(int armoryID) {
 		ArmoryID = armoryID;
+	}
+
+	public int getFactionID() {
+		return FactionID;
+	}
+
+	public void setFactionID(int factionID) {
+		FactionID = factionID;
 	}
 	
 }

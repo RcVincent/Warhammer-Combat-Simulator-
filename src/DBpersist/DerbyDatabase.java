@@ -12,8 +12,10 @@ import java.util.List;
 
 import DBpersist.DBUtil;
 import DBpersist.DerbyDatabase.Transaction;
-import model.Favorites;
 import DBpersist.PersistenceException;
+
+import model.Armory;
+import model.Favorites;
 import model.User;
 
 public class DerbyDatabase implements IDatabase {
@@ -428,6 +430,12 @@ public class DerbyDatabase implements IDatabase {
 			fav.setFavID(resultSet.getInt(index++));;
 			fav.setUserID(resultSet.getInt(index++));
 			fav.setName(resultSet.getString(index++));
+		}
+		private void loadMenu(Armory A, ResultSet resultSet, int index) throws SQLException {
+			A.setArmoryID(index++);
+			A.setFactionID(index++);
+			A.setWeaponID(index++);
+			
 		}
 		
 		//creating the tables
