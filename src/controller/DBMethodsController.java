@@ -10,7 +10,7 @@ import model.User;
 public class DBMethodsController {
 	private IDatabase db = null;
 	
-	DBMethodsController() {
+	public DBMethodsController() {
 		DatabaseProvider.setInstance(new DerbyDatabase());
 		db = DatabaseProvider.getInstance();
 	}
