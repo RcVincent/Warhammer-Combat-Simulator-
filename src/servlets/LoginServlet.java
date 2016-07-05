@@ -43,17 +43,17 @@ public class LoginServlet {
 				req.getSession(true).setAttribute("username", username);
 				
 				req.getSession().setAttribute("userID", u.getUserID());
-				//If user is an owner send them to a page of their restaurants
+				
 				if(u.getAccountType().equals("admin")){
 					resp.sendRedirect(req.getContextPath() + "/AdminPage");
 				}
-				//If user is a patron send to the homepage
+				
 				
 				resp.sendRedirect(req.getContextPath() + "/Homepage");
 				
 
 			}
-			//display error message for incorrect username or password
+			
 			else{
 				errorMessage = "Incorrect Username or Password";
 				req.setAttribute("errorMessage", errorMessage);
