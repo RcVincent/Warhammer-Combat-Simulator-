@@ -7,7 +7,7 @@ import DBpersist.IDatabase;
 public class ChangeUsername {
 	private IDatabase db = null;
 	public ChangeUsername(){
-		DatabaseProvider.setInstance(db);
+		DatabaseProvider.setInstance(new DerbyDatabase());
 		db = DatabaseProvider.getInstance();
 	}
 	
