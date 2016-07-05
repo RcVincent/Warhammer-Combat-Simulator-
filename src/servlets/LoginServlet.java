@@ -7,12 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.LoginController;
+import controller.DBMethodsController;
 import model.User;
 
 public class LoginServlet {
 
 	private static final long serialVersionUID = 1L;
+	DBMethodsController controller = new DBMethodsController();
 	
 	//private matchUsernameWithPassword match = null;
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -35,7 +36,7 @@ public class LoginServlet {
 		
 		if(user.size()>0){
 			User u = user.get(0);
-			 LoginController controller = new LoginController(); 
+			 
 			
 			if(controller.authenticate(u, password)){
 				//Set the session true and set their username
