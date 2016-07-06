@@ -386,7 +386,7 @@ public class DerbyDatabase implements IDatabase {
 							Faction_ID = resultSet.getInt(1);
 						}
 						stmt2 = conn.prepareStatement(
-								"insert into armory(Faction_ID, Armory_weapon,) " +
+								"insert into armory(Faction_ID, Armory_weapon) " +
 										" values(?, ?) "
 								);
 						stmt2.setInt(1, Faction_ID);
@@ -408,8 +408,8 @@ public class DerbyDatabase implements IDatabase {
 						while (resultSet2.next()) {
 							found = true;
 							Weapon w = new Weapon();
-							//loadMenu(m, resultSet2, 1);
-							//result.add(m);
+							loadArmory(w, resultSet2, 1);
+							result.add(w);
 						}
 
 						// check if the title was found
