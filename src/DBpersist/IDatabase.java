@@ -3,6 +3,7 @@ import java.util.List;
 
 import model.Favorites;
 import model.User;
+import model.Weapon;
 
 
 public interface IDatabase {
@@ -19,4 +20,6 @@ public interface IDatabase {
 	
 
 	List<Favorites> getFromInfantryFavorites(Integer userId);
+
+	List<Weapon> addWeaponToArmory(String weapon, String Faction_name);
 }

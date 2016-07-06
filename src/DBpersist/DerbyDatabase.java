@@ -17,6 +17,7 @@ import DBpersist.PersistenceException;
 import model.Armory;
 import model.Favorites;
 import model.User;
+import model.Weapon;
 
 public class DerbyDatabase implements IDatabase {
 	static {
@@ -341,7 +342,7 @@ public class DerbyDatabase implements IDatabase {
 						while (resultSet.next()) {
 							found = true;
 							Favorites u = new Favorites();
-							loadFavoriteRest(u, resultSet, 1);
+							loadFavorite(u, resultSet, 1);
 							result.add(u);
 						}
 
@@ -360,6 +361,132 @@ public class DerbyDatabase implements IDatabase {
 					}
 				}
 			});
+		}
+		@Override
+		public List<Weapon> addWeaponToArmory(final String weapon, final String Faction_name) {
+			return executeTransaction(new Transaction<List<Weapon>>() {
+				@Override
+				public List<Weapon> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null;
+					PreparedStatement stmt3 = null;
+					ResultSet resultSet = null;
+					ResultSet resultSet2 = null;
+
+
+					try {
+						stmt = conn.prepareStatement(
+								"select Faction_ID from factions " +
+										" where faction_name = ? "
+								);
+						stmt.setString(1, Faction_name);
+						resultSet = stmt.executeQuery();
+						int Faction_ID = 0;
+						if(resultSet.next()) {
+							Faction_ID = resultSet.getInt(1);
+						}
+						stmt2 = conn.prepareStatement(
+								"insert into armory(Faction_ID, Armory_weapon,) " +
+										" values(?, ?) "
+								);
+						stmt2.setInt(1, Faction_ID);
+						stmt2.setString(2, weapon);
+						stmt2.executeUpdate();
+						
+						stmt3 = conn.prepareStatement(
+								"select * " +
+										" from Armory " +
+										" where Armory_weapon = ?"
+								);
+						stmt3.setString(1, weapon);
+						
+						resultSet2 = stmt3.executeQuery();
+
+						// for testing that a result was returned
+						Boolean found = false;
+						List<Weapon> result = new ArrayList<Weapon>();
+						while (resultSet2.next()) {
+							found = true;
+							Weapon w = new Weapon();
+							//loadMenu(m, resultSet2, 1);
+							//result.add(m);
+						}
+
+						// check if the title was found
+						if (!found) {
+							System.out.println("<" + weapon + "> was not found in the armory");
+						}
+
+						return result;
+
+
+					} finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+						DBUtil.closeQuietly(stmt2);
+						DBUtil.closeQuietly(stmt3);
+					}
+				}
+			});
+		}
+		
+		public Weapon DeleteFromArmory(final String weaponName) {
+			return executeTransaction(new Transaction<Weapon>() {
+				@Override
+				public Weapon execute(Connection conn) throws SQLException {
+//					
+					PreparedStatement stmt1 = null;
+					PreparedStatement stmt2 = null;
+					ResultSet resultSet = null;
+					ResultSet resultSet2 = null;
+
+					try {
+						
+						
+						stmt1 = conn.prepareStatement(
+								" delete from Armory " +
+										" where Armory_weapon = ?"
+								);
+						stmt1.setString(1, weaponName);
+						
+						stmt1.executeUpdate();
+						
+						stmt2 = conn.prepareStatement(
+								"select * " +
+										" from Armory " +
+										" where Armory_item = ?"
+								);
+						stmt2.setString(1, weaponName);
+						
+						resultSet2 = stmt2.executeQuery();
+
+						// for testing that a result was returned
+						Boolean found = false;
+						Weapon result = new Weapon();
+						while (resultSet2.next()) {
+							found = true;
+							Weapon w = new Weapon();
+							loadArmory(w, resultSet, 1);
+							result = w;
+						}
+
+						// check if the title was found
+						if (!found) {
+							System.out.println("<" + weaponName + "> was not found in the menu table");
+						}
+
+						return result;
+
+
+					} finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(resultSet2);
+						DBUtil.closeQuietly(stmt1);
+						DBUtil.closeQuietly(stmt2);
+					}
+				}
+			});
+			
 		}
 		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -426,16 +553,16 @@ public class DerbyDatabase implements IDatabase {
 			user.setLname(resultSet.getString(index++));
 		}
 		
-		private void loadFavoriteRest(Favorites fav, ResultSet resultSet, int index) throws SQLException {
+		private void loadFavorite(Favorites fav, ResultSet resultSet, int index) throws SQLException {
 			fav.setFavID(resultSet.getInt(index++));;
 			fav.setUserID(resultSet.getInt(index++));
 			fav.setName(resultSet.getString(index++));
 		}
-		private void loadMenu(Armory A, ResultSet resultSet, int index) throws SQLException {
-			A.setArmoryID(index++);
-			A.setFactionID(index++);
-			A.setWeaponID(index++);
-			
+		
+		private void loadArmory(Weapon w, ResultSet resultSet, int index) throws SQLException {
+			w.setName(resultSet.getString(index++));
+			w.setStrength(resultSet.getInt(index++));
+			w.setAP(resultSet.getInt(index++));
 		}
 		
 		//creating the tables
