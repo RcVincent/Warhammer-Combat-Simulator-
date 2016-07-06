@@ -4,7 +4,7 @@ public class Weapon {
 	private int Strength;
 	private int AP;
 	private String name;
-	
+	private int armory_id;
 	public Weapon() {
 		
 	}
@@ -31,6 +31,14 @@ public class Weapon {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getArmory_id() {
+		return armory_id;
+	}
+
+	public void setArmory_id(int armory_id) {
+		this.armory_id = armory_id;
 	}
 
 }

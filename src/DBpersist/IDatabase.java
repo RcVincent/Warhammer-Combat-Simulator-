@@ -1,6 +1,7 @@
 package DBpersist;
 import java.util.List;
 
+import model.Armory;
 import model.Favorites;
 import model.User;
 import model.Weapon;
@@ -17,9 +18,9 @@ public interface IDatabase {
 
 	List<User> changeUsername(String name, String newName, String pswd);
 	
-	
-
 	List<Favorites> getFromInfantryFavorites(Integer userId);
 
 	List<Weapon> addWeaponToArmory(String weapon, String Faction_name);
+	
+	List<Armory> armoryByFactionName(String factionName); 
 }

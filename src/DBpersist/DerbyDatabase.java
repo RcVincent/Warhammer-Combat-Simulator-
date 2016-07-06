@@ -408,7 +408,7 @@ public class DerbyDatabase implements IDatabase {
 						while (resultSet2.next()) {
 							found = true;
 							Weapon w = new Weapon();
-							loadArmory(w, resultSet2, 1);
+							loadWeapon(w, resultSet2, 1);
 							result.add(w);
 						}
 
@@ -466,7 +466,7 @@ public class DerbyDatabase implements IDatabase {
 						while (resultSet2.next()) {
 							found = true;
 							Weapon w = new Weapon();
-							loadArmory(w, resultSet, 1);
+							loadWeapon(w, resultSet, 1);
 							result = w;
 						}
 
@@ -487,6 +487,46 @@ public class DerbyDatabase implements IDatabase {
 				}
 			});
 			
+		}
+		
+		public List<Armory> armoryByFactionName(final String factionName) {
+			return executeTransaction(new Transaction<List<Armory>>(){
+				
+				public List<Armory> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"select armory.* " +
+										"from armory, factions " + 
+										"and armory.faction_id = faction.faction_id "
+								);
+						stmt.setString(1, factionName);
+						List<Armory> result = new ArrayList<Armory>();
+						resultSet = stmt.executeQuery();
+						Boolean found = false;
+						
+						while (resultSet.next()) {
+							found = true;
+							
+							Armory A = new Armory(); 
+							loadArmory(A, resultSet, 1);
+							result.add(A);
+						}
+						
+						if(!found) {
+							System.out.println("<" + factionName + "> was not found");
+						}
+						return result;
+					}
+					
+					finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+				}
+			});
 		}
 		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
@@ -559,10 +599,17 @@ public class DerbyDatabase implements IDatabase {
 			fav.setName(resultSet.getString(index++));
 		}
 		
-		private void loadArmory(Weapon w, ResultSet resultSet, int index) throws SQLException {
+		private void loadArmory(Armory a, ResultSet resultSet, int index) throws SQLException {
+			a.setFactionID(resultSet.getInt(index++));
+			a.setArmoryID(resultSet.getInt(index++));
+			
+			
+		}
+		private void loadWeapon(Weapon w, ResultSet resultSet, int index) throws SQLException {
 			w.setName(resultSet.getString(index++));
 			w.setStrength(resultSet.getInt(index++));
 			w.setAP(resultSet.getInt(index++));
+			w.setArmory_id(resultSet.getInt(index++));
 		}
 		
 		//creating the tables
