@@ -30,6 +30,17 @@ public class DBMethodsController {
 		db.DeleteUserFromDatabase(username, Password);
 	}
 	
+	//Add a weapon to a factions armory
+	public void AddWeapon(String weaponName, String Faction_name) {
+		db.addWeaponToArmory(weaponName, Faction_name);
+	}
+	
+	//Remove a weapon from an armory.
+	public void RemoveWeapon(String weaponName) {
+		db.DeleteFromArmory(weaponName);
+	}
+	
+	
 	//Match users with their entered password 
 	public ArrayList<User> matchUser(String name){
 		List<User> userList = db.matchUsernameWithPassword(name);
@@ -61,4 +72,6 @@ public class DBMethodsController {
 		}
 		return real;
 	}
+	
+	
 }

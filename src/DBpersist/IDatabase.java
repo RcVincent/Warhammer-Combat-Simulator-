@@ -22,5 +22,7 @@ public interface IDatabase {
 
 	List<Weapon> addWeaponToArmory(String weapon, String Faction_name);
 	
+	Weapon DeleteFromArmory(String weaponName) ;
+	
 	List<Armory> armoryByFactionName(String factionName); 
 }
