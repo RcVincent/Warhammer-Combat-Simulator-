@@ -32,7 +32,6 @@ public class AddWeaponServlet {
 		String message = null;
 		String weaponToRemove = null;
 		String weaponToAdd = null;
-		String NewItemPrice = req.getParameter("price");
 		String faction_name = (String)req.getSession().getAttribute("faction");
 		
 		weaponToRemove = req.getParameter("itemToRemove");
