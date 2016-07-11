@@ -5,6 +5,7 @@ import java.util.List;
 import DBpersist.DatabaseProvider;
 import DBpersist.DerbyDatabase;
 import DBpersist.IDatabase;
+import model.Armory;
 import model.User;
 
 public class DBMethodsController {
@@ -40,6 +41,23 @@ public class DBMethodsController {
 		db.DeleteFromArmory(weaponName);
 	}
 	
+	public ArrayList<Armory> getArmory(String factionName) {
+		List<Armory> armoryList = db.armoryByFactionName(factionName);
+		ArrayList<Armory> armories = null;
+		
+		if(armoryList.isEmpty()) {
+			System.out.println("No such armories exist, even in the webway");
+			return null;
+		}
+		
+		else {
+			armories = new ArrayList<Armory>();
+			for(Armory A: armoryList) {
+				armories.add(A);
+			}
+			return armories;
+		}
+	}
 	
 	//Match users with their entered password 
 	public ArrayList<User> matchUser(String name){
