@@ -59,6 +59,21 @@ public class DBMethodsController {
 		}
 	}
 	
+	public void GetArmoryFromFacID(int faction_id) {
+		db.findArmoryByFactionID(faction_id);
+	}
+	
+	public void GetArmoryFromFacName(String faction_name) {
+		db.findArmoryByFactionName(faction_name);
+	}
+	
+	public void SearchForFaction(String faction_name) {
+		db.searchByFactionName(faction_name);
+	}
+	
+	public void SearchForFactionArmory(int armory_id) {
+		db.searchFactionByArmoryID(armory_id);
+	}
 	
 	//Match users with their entered password 
 	public ArrayList<User> matchUser(String name){
