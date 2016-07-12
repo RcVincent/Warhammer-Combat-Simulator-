@@ -584,13 +584,59 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
-		public List<Faction> searchByFactionName() {
-			
+		public List<Faction> searchByFactionName(String faction_name) {
+			return executeTransaction(new Transaction<List<Faction>>(){
+
+				@Override
+				public List<Faction> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					
+					try{
+						stmt = conn.prepareStatement(
+								"select * from factions" + 
+										"where faction_name = ?"								
+							);
+						stmt.setString(1, faction_name);
+						resultSet = stmt.executeQuery();
+						Boolean found = true;
+						List<Faction> result = new ArrayList<Faction>();
+						
+						while(resultSet.next()) {
+							found = true;
+							
+							Faction f = new Faction();
+							loadFaction(f, resultSet, 1);
+							result.add(f);
+						}
+						
+						if(!found) {
+							System.out.println("<" + faction_name + "was not found in our records. It can be assumed to be destroyed in the name of the emporer.");
+						}
+						return result;
+						
+					}
+					finally{
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+					
+				}
+				
+				
+				});
 		}
 		
-		public List<Faction> searhcByFactionID() {
-			
+		public List<Faction> searhcByArmoryID(int faction_id) {
+			return executeTransaction(new Transaction<List<Faction>>(){
+				
+				public List<Faction> execute(Connection conn) throws SQLException {
+				
+				
+				}	
+			});
 		}
+		
 		
 		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
