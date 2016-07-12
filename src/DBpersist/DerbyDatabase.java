@@ -15,6 +15,7 @@ import DBpersist.DerbyDatabase.Transaction;
 import DBpersist.PersistenceException;
 
 import model.Armory;
+import model.Faction;
 import model.Favorites;
 import model.User;
 import model.Weapon;
@@ -529,6 +530,68 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		public List<Faction> createFaction(int faction_id, String faction_name) {
+			return  executeTransaction(new Transaction<List<Faction>>() {
+
+				@Override
+				public List<Faction> execute(Connection conn) throws SQLException {
+					
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null; 
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"insert into factions(faction_faction_id, faction_faction_name)" +
+									"values(?,?)"
+								);
+						stmt.setInt(1, faction_id);
+						stmt.setString(2, faction_name);
+						stmt.executeUpdate();
+						
+						stmt2 = conn.prepareStatement(
+								"select *" + 
+										"from factions" + 
+										"where faction_faction_name = ? "
+								);
+						stmt2.setString(1, faction_name);
+						resultSet = stmt2.executeQuery();
+						
+						Boolean found = false;
+						List<Faction> result = new ArrayList<Faction>();
+						while(resultSet.next()) {
+							found = true;
+							Faction f = new Faction();
+							loadFaction(f, resultSet, 1);
+							result.add(f);
+						}
+						
+						if(!found) {
+							System.out.println("<" + faction_name + "was not found in our records. It can be assumed to be destroyed in the name of the emporer.");
+						}
+						
+						return result;
+					}
+					
+					finally {
+						DBUtil.closeQuietly(conn);
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+						DBUtil.closeQuietly(stmt2);
+					}
+				}
+				
+			});
+		}
+		
+		public List<Faction> searchByFactionName() {
+			
+		}
+		
+		public List<Faction> searhcByFactionID() {
+			
+		}
+		
 		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
@@ -611,6 +674,11 @@ public class DerbyDatabase implements IDatabase {
 			w.setStrength(resultSet.getInt(index++));
 			w.setAP(resultSet.getInt(index++));
 			w.setArmory_id(resultSet.getInt(index++));
+		}
+		
+		private void loadFaction(Faction f, ResultSet resultSet, int index) throws SQLException {
+			f.setFaction_id(resultSet.getInt(index++));
+			f.setFaction_name(resultSet.getString(index++));
 		}
 		
 		//creating the tables
