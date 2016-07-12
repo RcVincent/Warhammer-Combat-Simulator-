@@ -638,7 +638,7 @@ public class DerbyDatabase implements IDatabase {
 						stmt = conn.prepareStatement(
 									"select factions.* from factions, armories" +
 									"where armories.armory_id = ?" +
-									"and factions.armory_id = armories.armoryID"		
+									"and factions.armory_id = armories.ArmoryID"		
 								);
 						stmt.setInt(1, armory_id);
 						resultSet = stmt.executeQuery();
@@ -666,6 +666,87 @@ public class DerbyDatabase implements IDatabase {
 		}
 		
 		
+		public List<Armory> findArmoryByFactionName(String faction_name) {
+			return executeTransaction(new Transaction<List<Armory>>() {
+
+				@Override
+				public List<Armory> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"select armories.* from armories, factions" +
+								"where factions.faction_name = ?" +
+								"and armories.FactionID = factions.faction_id"
+								);
+						stmt.setString(1, faction_name);
+						resultSet = stmt.executeQuery();
+						
+						List<Armory> result = new ArrayList<Armory>();
+						
+						Boolean found = false;
+						while(resultSet.next()) {
+							found = true;
+							
+							Armory a = new Armory();
+							loadArmory(a, resultSet, 1);
+							result.add(a);
+						}
+						
+						return result;
+					}
+					
+					finally{
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+				}
+					
+			});
+		}
+		
+		public List<Armory> findArmoryByFactionID(int faction_id) {
+			return executeTransaction(new Transaction<List<Armory>>() {
+
+				@Override
+				public List<Armory> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"select armories.* from armories, factions" +
+								"where factions.faction_id = ?" +
+								"and armories.FactionID = factions.faction_id"
+								);
+						
+						stmt.setInt(1, faction_id);
+						resultSet = stmt.executeQuery();
+						
+						List<Armory> result = new ArrayList<Armory>();
+						
+						Boolean found = false;
+						while(resultSet.next()) {
+							found = true;
+							
+							Armory a = new Armory();
+							loadArmory(a, resultSet, 1);
+							result.add(a);
+						}
+						
+						return result;
+					}
+					
+					finally{
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+				}
+					
+			});
+			
+		}
 		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
