@@ -490,45 +490,6 @@ public class DerbyDatabase implements IDatabase {
 			
 		}
 		
-		public List<Armory> armoryByFactionName(final String factionName) {
-			return executeTransaction(new Transaction<List<Armory>>(){
-				
-				public List<Armory> execute(Connection conn) throws SQLException {
-					PreparedStatement stmt = null;
-					ResultSet resultSet = null;
-					
-					try {
-						stmt = conn.prepareStatement(
-								"select armory.* " +
-										"from armory, factions " + 
-										"and armory.faction_id = faction.faction_id "
-								);
-						stmt.setString(1, factionName);
-						List<Armory> result = new ArrayList<Armory>();
-						resultSet = stmt.executeQuery();
-						Boolean found = false;
-						
-						while (resultSet.next()) {
-							found = true;
-							
-							Armory A = new Armory(); 
-							loadArmory(A, resultSet, 1);
-							result.add(A);
-						}
-						
-						if(!found) {
-							System.out.println("<" + factionName + "> was not found");
-						}
-						return result;
-					}
-					
-					finally {
-						DBUtil.closeQuietly(resultSet);
-						DBUtil.closeQuietly(stmt);
-					}
-				}
-			});
-		}
 		
 		public List<Faction> createFaction(int faction_id, String faction_name) {
 			return  executeTransaction(new Transaction<List<Faction>>() {
@@ -627,7 +588,7 @@ public class DerbyDatabase implements IDatabase {
 				});
 		}
 		
-		public List<Faction> searhcByArmoryID(int armory_id) {
+		public List<Faction> searchFactionByArmoryID(int armory_id) {
 			return executeTransaction(new Transaction<List<Faction>>(){
 				
 				public List<Faction> execute(Connection conn) throws SQLException {

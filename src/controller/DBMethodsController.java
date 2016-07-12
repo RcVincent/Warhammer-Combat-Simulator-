@@ -42,7 +42,7 @@ public class DBMethodsController {
 	}
 	
 	public ArrayList<Armory> getArmory(String factionName) {
-		List<Armory> armoryList = db.armoryByFactionName(factionName);
+		List<Armory> armoryList = db.findArmoryByFactionName(factionName);
 		ArrayList<Armory> armories = null;
 		
 		if(armoryList.isEmpty()) {
@@ -58,6 +58,7 @@ public class DBMethodsController {
 			return armories;
 		}
 	}
+	
 	
 	//Match users with their entered password 
 	public ArrayList<User> matchUser(String name){

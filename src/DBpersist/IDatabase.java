@@ -2,6 +2,7 @@ package DBpersist;
 import java.util.List;
 
 import model.Armory;
+import model.Faction;
 import model.Favorites;
 import model.User;
 import model.Weapon;
@@ -24,5 +25,15 @@ public interface IDatabase {
 	
 	Weapon DeleteFromArmory(String weaponName) ;
 	
-	List<Armory> armoryByFactionName(String factionName); 
+	List<Armory> findArmoryByFactionName(String faction_name);
+	
+	List<Armory> findArmoryByFactionID(int faction_id);
+	
+	
+	
+	List<Faction> searchByFactionName(String faction_name);
+	
+	List<Faction> searchFactionByArmoryID(int armory_id);
+	
+	
 }
