@@ -627,11 +627,39 @@ public class DerbyDatabase implements IDatabase {
 				});
 		}
 		
-		public List<Faction> searhcByArmoryID(int faction_id) {
+		public List<Faction> searhcByArmoryID(int armory_id) {
 			return executeTransaction(new Transaction<List<Faction>>(){
 				
 				public List<Faction> execute(Connection conn) throws SQLException {
-				
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+									"select factions.* from factions, armories" +
+									"where armories.armory_id = ?" +
+									"and factions.armory_id = armories.armoryID"		
+								);
+						stmt.setInt(1, armory_id);
+						resultSet = stmt.executeQuery();
+						
+						List<Faction> result = new ArrayList<Faction>();
+						Boolean found = false;
+						
+						while(resultSet.next()) {
+							found = true;
+							Faction f = new Faction();
+							
+							loadFaction(f, resultSet, 1);
+							result.add(f);
+						}
+						return result;
+					}
+					
+					finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
 				
 				}	
 			});
@@ -735,7 +763,7 @@ public class DerbyDatabase implements IDatabase {
 					PreparedStatement stmt1 = null;
 					PreparedStatement stmt2 = null;
 					PreparedStatement stmt3 = null;
-					
+					PreparedStatement stmt4 = null;
 					try {
 						stmt1 = conn.prepareStatement(
 								"create table users (" +
@@ -765,8 +793,8 @@ public class DerbyDatabase implements IDatabase {
 						
 						//Create the Armory 
 						stmt3 = conn.prepareStatement(
-								" create table menu (" +
-										" armory_id integer primary key " +
+								" create table armories (" +
+										" armoryID integer primary key " +
 										" 		generated always as identity (start with 1, increment by 1), " +
 										" faction_id integer, "   +
 										" armory_item varchar(40), "      +
@@ -775,12 +803,22 @@ public class DerbyDatabase implements IDatabase {
 						
 						stmt3.executeUpdate();
 						
+						stmt4 = conn.prepareStatement(
+								"create table factions (" +
+										"faction_id integer primary key" +
+										"	generated always as identity (start with 1, incremented by 1), " +
+										"faction_name varchar(40)," +
+										"armory_id integer" +
+										")"
+								);
+						stmt4.executeUpdate();
 						
 						return true;
 					} finally {
 						DBUtil.closeQuietly(stmt1);
 						DBUtil.closeQuietly(stmt2);
 						DBUtil.closeQuietly(stmt3);
+						DBUtil.closeQuietly(stmt4);
 					}
 				}
 			});

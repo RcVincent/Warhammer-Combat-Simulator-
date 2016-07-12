@@ -1,7 +1,7 @@
 package model;
 
 public class Faction {
-	private int faction_id;
+	private int faction_id, armory_id;
 	private String faction_name;
 	
 	public Faction() {
@@ -22,6 +22,14 @@ public class Faction {
 
 	public void setFaction_name(String faction_name) {
 		this.faction_name = faction_name;
+	}
+
+	public int getArmory_id() {
+		return armory_id;
+	}
+
+	public void setArmory_id(int armory_id) {
+		this.armory_id = armory_id;
 	}
 	
 	
