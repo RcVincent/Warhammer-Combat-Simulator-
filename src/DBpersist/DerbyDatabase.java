@@ -535,12 +535,59 @@ public class DerbyDatabase implements IDatabase {
 					}
 					
 					finally {
-						DBUtil.closeQuietly(conn);
+						
 						DBUtil.closeQuietly(resultSet);
 						DBUtil.closeQuietly(stmt);
 						DBUtil.closeQuietly(stmt2);
 					}
 				}
+				
+			});
+		}
+		
+		public List<Faction> removeFaction(String faction_name, int faction_id) {
+			return executeTransaction(new Transaction<List<Faction>>(){
+
+				@Override
+				public List<Faction> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"delete from factions" +
+										"where faction_faction_name = ?" +
+										"and faction_faction_id = ?"
+								);
+						stmt.setInt(1, faction_id);
+						stmt.setString(2, faction_name);
+						stmt.executeUpdate();
+						
+						stmt2 = conn.prepareStatement(
+								"select * from factions"
+								);
+						resultSet = stmt2.executeQuery();
+						List<Faction> result = new ArrayList<Faction>();
+						
+						Boolean found = false;
+						
+						while(resultSet.next()) {
+							found = true;
+							
+							Faction f = new Faction();
+							loadFaction(f, resultSet, 1);
+							result.add(f);
+						}
+						return result;
+					}
+					finally{
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+						DBUtil.closeQuietly(stmt2);
+					}
+				}
+				
 				
 			});
 		}
