@@ -38,7 +38,8 @@ public class DerbyDatabase implements IDatabase {
 		//********************
 		//adding a user to the database
 		//********************
-		@Override
+		
+	@Override
 		public List<User> addUserToDatabase(final String name, final String pswd, final String email, final String type, final String first,
 				final String last) {
 			return executeTransaction(new Transaction<List<User>>() {
@@ -100,6 +101,7 @@ public class DerbyDatabase implements IDatabase {
 		//*************************************************
 		//match user name with password for authentication
 		//*************************************************
+	
 		@Override
 		public List<User> matchUsernameWithPassword(final String name) {
 			
@@ -151,6 +153,7 @@ public class DerbyDatabase implements IDatabase {
 		//********************************
 		//Delete a user from the database
 		//********************************
+		
 		@Override
 		public List<User> DeleteUserFromDatabase(final String name, final String pswd) {
 			return executeTransaction(new Transaction<List<User>>() {
@@ -209,6 +212,7 @@ public class DerbyDatabase implements IDatabase {
 		//************************
 		//Change username
 		//***********************
+		
 		@Override
 		public List<User> changeUsername(final String name, final String newName, final String pswd) {
 			return executeTransaction(new Transaction<List<User>>() {
@@ -363,6 +367,7 @@ public class DerbyDatabase implements IDatabase {
 				}
 			});
 		}
+		
 		@Override
 		public List<Weapon> addWeaponToArmory(final String weapon, final String Faction_name) {
 			return executeTransaction(new Transaction<List<Weapon>>() {
@@ -431,6 +436,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public Weapon DeleteFromArmory(final String weaponName) {
 			return executeTransaction(new Transaction<Weapon>() {
 				@Override
@@ -490,7 +496,7 @@ public class DerbyDatabase implements IDatabase {
 			
 		}
 		
-		
+		@Override
 		public List<Faction> createFaction(int faction_id, String faction_name) {
 			return  executeTransaction(new Transaction<List<Faction>>() {
 
@@ -545,6 +551,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public List<Faction> removeFaction(String faction_name, int faction_id) {
 			return executeTransaction(new Transaction<List<Faction>>(){
 
@@ -592,6 +599,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public List<Faction> searchByFactionName(String faction_name) {
 			return executeTransaction(new Transaction<List<Faction>>(){
 
@@ -635,6 +643,7 @@ public class DerbyDatabase implements IDatabase {
 				});
 		}
 		
+		@Override
 		public List<Faction> searchFactionByArmoryID(int armory_id) {
 			return executeTransaction(new Transaction<List<Faction>>(){
 				
@@ -673,7 +682,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
-		
+		@Override
 		public List<Armory> findArmoryByFactionName(String faction_name) {
 			return executeTransaction(new Transaction<List<Armory>>() {
 
@@ -714,6 +723,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public List<Armory> findArmoryByFactionID(int faction_id) {
 			return executeTransaction(new Transaction<List<Armory>>() {
 

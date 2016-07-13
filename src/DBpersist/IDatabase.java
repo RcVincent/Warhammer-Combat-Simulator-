@@ -29,7 +29,9 @@ public interface IDatabase {
 	
 	List<Armory> findArmoryByFactionID(int faction_id);
 	
+	List<Faction> createFaction(int faction_id, String faction_name);
 	
+	List<Faction> removeFaction(String faction_name, int faction_id);
 	
 	List<Faction> searchByFactionName(String faction_name);
 	
