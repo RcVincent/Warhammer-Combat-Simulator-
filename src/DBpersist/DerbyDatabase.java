@@ -816,6 +816,61 @@ public class DerbyDatabase implements IDatabase {
 				
 			});
 		}
+		
+		public List<Favorites> addFactionToFavorites(String faction_name, int faction_id, int user_id) {
+			return executeTransaction(new Transaction<List<Favorites>>() {
+
+				@Override
+				public List<Favorites> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"insert into favorites(user_id, faction_name, faction_id)" +
+										"values(?,?,?)"
+								);
+						stmt.setInt(1, user_id);
+						stmt.setString(2, faction_name);
+						stmt.setInt(3, faction_id);
+						
+						stmt.executeUpdate();
+						
+						stmt2 = conn.prepareStatement(
+								"select *" +
+										"from favorites" +
+										"where user_id = ?"
+								);
+						stmt2.setInt(1, user_id);
+						
+						resultSet = stmt2.executeQuery();
+						
+						Boolean found = false;
+						List<Favorites> result = new ArrayList<Favorites>();
+						while (resultSet.next()) {
+							found = true;
+							Favorites u = new Favorites();
+							loadFavorite(u, resultSet, 1);
+							result.add(u);
+						}
+
+						// check if the title was found
+						if (!found) {
+							System.out.println("<" + faction_name + "> was not found in the factions table");
+						}
+
+						return result;
+					}
+					finally{
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+				}
+					
+			});
+		}
+		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
 				return doExecuteTransaction(txn);

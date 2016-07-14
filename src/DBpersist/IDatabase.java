@@ -29,6 +29,8 @@ public interface IDatabase {
 	
 	List<Armory> findArmoryByFactionID(int faction_id);
 	
+	List<Armory> deleteArmory(int armory_id);
+	
 	List<Faction> createFaction(int faction_id, String faction_name);
 	
 	List<Faction> removeFaction(String faction_name, int faction_id);
@@ -37,5 +39,6 @@ public interface IDatabase {
 	
 	List<Faction> searchFactionByArmoryID(int armory_id);
 	
+	List<Favorites> addFactionToFavorites(String faction_name, int faction_id, int user_id);	
 	
 }
