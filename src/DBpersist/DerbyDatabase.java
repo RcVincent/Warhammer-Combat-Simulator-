@@ -766,6 +766,56 @@ public class DerbyDatabase implements IDatabase {
 			
 		}
 		
+		public List<Armory> deleteArmory(int armory_id) {
+			return executeTransaction(new Transaction<List<Armory>>() {
+
+				@Override
+				public List<Armory> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"select * from armories" +
+										"where armory_ArmoryID = ? "								
+								);
+						stmt.setInt(1, armory_id);
+						stmt.executeUpdate();
+						
+						stmt2 = conn.prepareStatement(
+								"select * from armories"
+								);
+						resultSet = stmt2.executeQuery();
+						List<Armory> result = new ArrayList<Armory>();
+						
+						Boolean found = false;
+						
+						while(resultSet.next()) {
+							found = true;
+							
+							Armory a = new Armory();
+							loadArmory(a, resultSet, 1);
+							result.add(a);
+						}
+						
+						if (!found) {
+							System.out.println("<Armory with" + armory_id + "> is not apparent in the armory table");
+						}
+						
+						return result;
+					}
+					
+					finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+						DBUtil.closeQuietly(stmt2);
+					}
+					
+				}
+				
+			});
+		}
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
 				return doExecuteTransaction(txn);
