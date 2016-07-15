@@ -871,6 +871,56 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		public List<Favorites> removeFromFavorites(String faction_name, int user_id) {
+			return executeTransaction(new Transaction<List<Favorites>>() {
+
+				@Override
+				public List<Favorites> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					PreparedStatement stmt2 = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"delete from favorites" +
+										"where faction_name = ?"
+								);
+						stmt.setString(1, faction_name);
+						stmt.executeUpdate();
+						
+						stmt2 = conn.prepareStatement(
+								"select favorites.* " +
+										"from favorites and users" +
+										"where favorites.userID = users.userID"
+								);
+						resultSet = stmt2.executeQuery();
+						
+						List<Favorites> result = new ArrayList<Favorites>();
+						Boolean found = false;
+						
+						while(resultSet.next()) {
+							found = true;
+							Favorites f = new Favorites(); 
+							loadFavorite(f, resultSet, 1);
+							result.add(f);
+						}
+						
+						if(!found) {
+							System.out.println("<" + faction_name + "> was not found in the favorites table of user" + user_id);
+						}
+						return result;
+						
+					}
+					finally{
+						
+					}
+							
+				}
+				
+				
+			});
+		}
+		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
 				return doExecuteTransaction(txn);

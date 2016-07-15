@@ -19,8 +19,6 @@ public interface IDatabase {
 
 	List<User> changeUsername(String name, String newName, String pswd);
 	
-	List<Favorites> getFromInfantryFavorites(Integer userId);
-
 	List<Weapon> addWeaponToArmory(String weapon, String Faction_name);
 	
 	Weapon DeleteFromArmory(String weaponName) ;
@@ -41,4 +39,7 @@ public interface IDatabase {
 	
 	List<Favorites> addFactionToFavorites(String faction_name, int faction_id, int user_id);	
 	
+	List<Favorites> getFromInfantryFavorites(Integer userId);
+	
+	List<Favorites> removeFromFavorites(String faction_name, int user_id);
 }
