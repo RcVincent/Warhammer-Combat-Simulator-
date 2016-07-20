@@ -24,9 +24,18 @@ public class FavoritesServlet {
 		
 		String faction = null;
 		ArrayList<Favorites> favs = new ArrayList<Favorites>();
+		
 		int userId =(int) req.getSession().getAttribute("userID");
+		int facId = (int) req.getSession().getAttribute("FactionID");
+		
 		faction = req.getParameter("faction");
 		
+		dbc.addFactionToFavs(faction, facId, userId);
+		favs = dbc.GetFavorites(userId);
+		
+		if(favs != null) {
+			req.setAttribute("faction", favs);
+		}
 		
 		req.getRequestDispatcher("/_view/Favorites.jsp").forward(req, resp);
 	}
@@ -35,5 +44,14 @@ public class FavoritesServlet {
 			throws ServletException, IOException {
 		
 		ArrayList<Favorites> favs = new ArrayList<Favorites>();
+		int userId =(int) req.getSession().getAttribute("userID");
+		
+		favs = dbc.GetFavorites(userId);
+		
+		if(favs!=null){
+			req.setAttribute("faction", favs);
+		}
+		
+		req.getRequestDispatcher("/_view/Favorites.jsp").forward(req, resp);
 	}
 }
