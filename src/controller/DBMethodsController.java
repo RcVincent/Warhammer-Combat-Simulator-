@@ -6,6 +6,7 @@ import DBpersist.DatabaseProvider;
 import DBpersist.DerbyDatabase;
 import DBpersist.IDatabase;
 import model.Armory;
+import model.Favorites;
 import model.User;
 
 public class DBMethodsController {
@@ -74,6 +75,18 @@ public class DBMethodsController {
 	public void SearchForFactionArmory(int armory_id) {
 		db.searchFactionByArmoryID(armory_id);
 	}
+	
+	public void addFactionToFavs(String faction_name, int faction_id, int user_id) {
+		db.addFactionToFavorites(faction_name, faction_id, user_id);
+	}
+	
+	public ArrayList<Favorites> GetFavorites(int user_id) {
+		List<Favorites> favList = null;
+		
+		//Need to create a get favorites method before finishing this 
+	}
+	
+	
 	
 	//Match users with their entered password 
 	public ArrayList<User> matchUser(String name){
