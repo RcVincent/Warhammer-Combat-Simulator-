@@ -921,6 +921,50 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		public List<Favorites> getFromFavorites(final int user_id) {
+			return executeTransaction(new Transaction<List<Favorites>>() {
+
+				@Override
+				public List<Favorites> execute(Connection conn) throws SQLException {
+					PreparedStatement stmt = null;
+					ResultSet resultSet = null;
+					
+					try {
+						stmt = conn.prepareStatement(
+								"select * " +
+										"from Favorites " + 
+										"where user_id = ?"
+								);
+						stmt.setInt(1, user_id);
+						
+						resultSet = stmt.executeQuery();
+						
+						Boolean found = false;
+						List<Favorites> result = new ArrayList<Favorites>();
+						
+						while(resultSet.next()) {
+							found = true;
+							Favorites f = new Favorites();
+							loadFavorite(f, resultSet, 1);
+							result.add(f);
+						}
+						
+						if(!found) {
+							System.out.println();
+						}
+						
+						return result;
+						
+					}
+					finally {
+						DBUtil.closeQuietly(resultSet);
+						DBUtil.closeQuietly(stmt);
+					}
+				}
+				
+			});
+		}
+		
 		public<ResultType> ResultType executeTransaction(Transaction<ResultType> txn) {
 			try {
 				return doExecuteTransaction(txn);

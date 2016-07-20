@@ -83,7 +83,20 @@ public class DBMethodsController {
 	public ArrayList<Favorites> GetFavorites(int user_id) {
 		List<Favorites> favList = null;
 		
-		//Need to create a get favorites method before finishing this 
+		favList = db.getFromFavorites(user_id);
+		ArrayList<Favorites> favs = null;
+		
+		if(favList.isEmpty()) {
+			System.out.println("No one is willing to fight for you");
+			return null;
+		}
+		else {
+			favs = new ArrayList<Favorites>();
+			for(Favorites f : favList) {
+				favs.add(f);
+			}
+		}
+		return favs;
 	}
 	
 	

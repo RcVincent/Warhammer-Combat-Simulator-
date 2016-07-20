@@ -42,4 +42,6 @@ public interface IDatabase {
 	List<Favorites> getFromInfantryFavorites(Integer userId);
 	
 	List<Favorites> removeFromFavorites(String faction_name, int user_id);
+	
+	List<Favorites> getFromFavorites(final int user_id);
 }
