@@ -88,8 +88,8 @@ button {
 					<table>
 						<tr>
 							<form action="${pageContext.servletContext.contextPath}/Faction" method="post">
-								<input type="hidden" name="restaurant" id="restaurant" value="${restaurant.name}">
-								<td><input type="submit" value="Click to view restaurant"></td>
+								<input type="hidden" name="faction" id="faction" value="${Faction.faction_name}">
+								<td><input type="submit" value="Click to view the faction's home area"></td>
 							</form>
 						</tr>
 					</table>
@@ -97,6 +97,37 @@ button {
 				<br>
 			</c:forEach>
 			
+			<div id = "Infantry">
+			<c:forEach items = "${Infantry}" var = "infantry">
+				<div id = "Factions">
+					<div id = "infantryName">${ infantry.name }</div>
+					<table>
+						<tr>
+							<form action="${pageContext.servletContext.contextPath}/Infantry" method="post">
+								<input type="hidden" name="infantry" id="infantry" value="${Infantry.name}">
+								<td><input type="submit" value="Click to view the infantry profile"></td>
+							</form>
+						</tr>
+					</table>
+				</div>
+				<br>
+			</c:forEach>
+			
+			<div id = "Weapons">
+			<c:forEach items = "${Weapon}" var = "weapon">
+				<div id = "Factions">
+					<div id = "weaponName">${ weapon.name }</div>
+					<table>
+						<tr>
+							<form action="${pageContext.servletContext.contextPath}/Weapon" method="post">
+								<input type="hidden" name="weapon" id="weapon" value="${weapon.name}">
+								<td><input type="submit" value="Click to view your personal armory"></td>
+							</form>
+						</tr>
+					</table>
+				</div>
+				<br>
+			</c:forEach>
 			<form action="${pageContext.servletContext.contextPath}/Homepage" method="get">
 					<input type="Submit" name="submit" value="Click to go to Homepage"/>
 			</form>
