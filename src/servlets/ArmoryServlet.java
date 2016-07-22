@@ -42,7 +42,7 @@ public class ArmoryServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		req.getRequestDispatcher("/_view/Menu.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/Armory.jsp").forward(req, resp);
 		
 	}
 }

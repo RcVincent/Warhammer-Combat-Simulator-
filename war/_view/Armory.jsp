@@ -66,7 +66,7 @@ button {
 		<div class="error">${errorMessage}</div>
 	</c:if>
 
-		<div id="PageName">${faction}</div>
+		<div id="PageName">${armory}</div>
 		
 	
 	<div id="Content">
