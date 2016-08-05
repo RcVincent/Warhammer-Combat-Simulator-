@@ -53,18 +53,41 @@ td.label{
 				</tr>
 			</c:forEach>
 			</table>
-			<table>
-				<tr>
-					<td class = "label"> Total price: </td>
-					<td class = "label"> $ ${total} </td>
-				</tr>
-				
+			
+	
 				<tr><form action="${pageContext.servletContext.contextPath}/Homepage" method="get">
 					<td><input type="Submit" name="submit" value="Click to go to Home"/></td>
 					</form>
 				</tr>
-			</table>
+			
 			</div>
+		<div id="LinkContent">
+			<div id="LinkName">Faction</div>
+			<form action="${pageContext.servletContext.contextPath}/Faction"
+				method="get">
+				<table>
+					<tr>
+						<td><input type="Submit" name="submit"
+							value="Click to view their faction" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
 		
+		
+		<c:if test="${ empty utype}">
+		<br>
+		<div id="LinkContent">
+			<div id="LinkName">Add ${infantry} to Favorites</div>
+			<form action="${pageContext.servletContext.contextPath}/Favorites" method="get">
+				<table>
+					<tr>
+						<input type="hidden" name="weapon" id="weapon" value="${weapon}">
+						<td><input type="Submit" name="submit" value="Click to add to favorites" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		</c:if>
 </body>
 </html>

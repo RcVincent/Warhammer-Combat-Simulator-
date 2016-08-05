@@ -67,7 +67,26 @@ button {
 	</c:if>
 
 		<div id="PageName">${infantry}</div>
+		<div id = "AccountInfo">
 		
+		<table>
+			<c:forEach items="${infantry}" var="infantry">
+			<tr>
+				<td> ${Infantry.name} </td>
+				<td> ${Infantry.WS}</td>	
+				<td> ${Infantry.BS }</td>
+				<td> ${Infantry.Strength}</td>
+				<td> ${Infantry.Toughness}</td>
+				<td> ${Infantry.Wounds}</td>
+				<td> ${Infantry.Initiative}</td>
+				<td> ${Infantry.Attacks}</td>
+				<td> ${Infantry.Leadership}</td>
+				<td> ${Infantry.Save}</td>
+				
+			</tr>
+			</c:forEach>
+		
+		</table>
 	
 	<div id="Content">
 		<div id="LinkContent">
