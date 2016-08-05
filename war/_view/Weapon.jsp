@@ -31,8 +31,22 @@ td.label{
 	<div id = "AccountInfo">
 			
 			<table>
+				<tr>
+					<td> Faction Number:</td>
+					<td> ${factionID} </td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td> Armory Number:</td>
+					<td> ${armoryID} </td>
+				</tr>
+			
+			</table>
+			<table>
 				<c:forEach items="${Armory}" var="armory">
 				<tr>
+					<td> ${Armory.WeaponID} </td>
 					<td> ${Weapon.name} </td>
 					<td> ${Weapon.strength} </td>
 					<td> ${Weapon.AP} </td>
@@ -44,6 +58,7 @@ td.label{
 					<td class = "label"> Total price: </td>
 					<td class = "label"> $ ${total} </td>
 				</tr>
+				
 				<tr><form action="${pageContext.servletContext.contextPath}/Homepage" method="get">
 					<td><input type="Submit" name="submit" value="Click to go to Home"/></td>
 					</form>
