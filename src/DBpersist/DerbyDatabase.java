@@ -766,6 +766,7 @@ public class DerbyDatabase implements IDatabase {
 			
 		}
 		
+		@Override
 		public List<Armory> deleteArmory(int armory_id) {
 			return executeTransaction(new Transaction<List<Armory>>() {
 
@@ -817,6 +818,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public List<Favorites> addFactionToFavorites(String faction_name, int faction_id, int user_id) {
 			return executeTransaction(new Transaction<List<Favorites>>() {
 
@@ -871,6 +873,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public List<Favorites> removeFromFavorites(String faction_name, int user_id) {
 			return executeTransaction(new Transaction<List<Favorites>>() {
 
@@ -921,6 +924,7 @@ public class DerbyDatabase implements IDatabase {
 			});
 		}
 		
+		@Override
 		public List<Favorites> getFromFavorites(final int user_id) {
 			return executeTransaction(new Transaction<List<Favorites>>() {
 

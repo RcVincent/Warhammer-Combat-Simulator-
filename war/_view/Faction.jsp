@@ -70,6 +70,7 @@ button {
 		
 	
 	<div id="Content">
+		
 		<div id="LinkContent">
 			<div id="LinkName">Home</div>
 			<form action="${pageContext.servletContext.contextPath}/Homepage"
@@ -131,6 +132,7 @@ button {
 			<button>
 				<a href="/lab03/Login">Logout</a>
 			</button>
+		</div>
 		</div>
 </body>
 </html>
