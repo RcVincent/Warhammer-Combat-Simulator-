@@ -1,11 +1,11 @@
-package DBpersist;
+package CombatSimulator.DBpersist;
 import java.util.List;
 
-import model.Armory;
-import model.Faction;
-import model.Favorites;
-import model.User;
-import model.Weapon;
+import CombatSimilator.model.Armory;
+import CombatSimilator.model.Faction;
+import CombatSimilator.model.Favorites;
+import CombatSimilator.model.User;
+import CombatSimilator.model.Weapon;
 
 
 public interface IDatabase {

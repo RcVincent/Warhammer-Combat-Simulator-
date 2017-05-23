@@ -1,13 +1,13 @@
-package DBpersist;
+package CombatSimulator.DBpersist;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.Infantry;
-import model.User;
-import model.Weapon;
+import CombatSimilator.model.Infantry;
+import CombatSimilator.model.User;
+import CombatSimilator.model.Weapon;
 
 public class InitialData {
 

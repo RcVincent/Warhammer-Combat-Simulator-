@@ -1,4 +1,4 @@
-package DBpersist;
+package CombatSimulator.DBpersist;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

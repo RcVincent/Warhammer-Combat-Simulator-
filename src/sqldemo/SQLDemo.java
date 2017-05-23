@@ -17,7 +17,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import DBpersist.*;
+import CombatSimulator.DBpersist.*;
 
 /**
  * An interactive query tool for SQLite.

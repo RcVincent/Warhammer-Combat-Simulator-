@@ -1,4 +1,4 @@
-package DBpersist;
+package CombatSimulator.DBpersist;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,15 +10,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import DBpersist.DBUtil;
-import DBpersist.DerbyDatabase.Transaction;
-import DBpersist.PersistenceException;
-
-import model.Armory;
-import model.Faction;
-import model.Favorites;
-import model.User;
-import model.Weapon;
+import CombatSimilator.model.Armory;
+import CombatSimilator.model.Faction;
+import CombatSimilator.model.Favorites;
+import CombatSimilator.model.User;
+import CombatSimilator.model.Weapon;
+import CombatSimulator.DBpersist.DBUtil;
+import CombatSimulator.DBpersist.PersistenceException;
+import CombatSimulator.DBpersist.DerbyDatabase.Transaction;
 
 public class DerbyDatabase implements IDatabase {
 	static {
