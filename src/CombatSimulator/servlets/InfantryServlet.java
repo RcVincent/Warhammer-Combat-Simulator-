@@ -1,4 +1,4 @@
-package servlets;
+package CombatSimulator.servlets;
 
 public class InfantryServlet {
 
