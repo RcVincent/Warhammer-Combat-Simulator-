@@ -1,9 +1,9 @@
-package controller;
+package CombatSimulator.controller;
 
 import java.util.Random;
 
-import model.Infantry;
-import model.Squad;
+import CombatSimilator.model.Infantry;
+import CombatSimilator.model.Squad;
 
 public class SquadController {
 	Random rand = new Random(); 

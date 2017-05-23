@@ -1,6 +1,6 @@
-package controller;
+package CombatSimulator.controller;
 
-import model.Infantry;
+import CombatSimilator.model.Infantry;
 
 
 public class InfantryCombatController {

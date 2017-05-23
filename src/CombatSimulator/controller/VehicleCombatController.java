@@ -1,8 +1,8 @@
-package controller;
+package CombatSimulator.controller;
 
 import java.util.Random;
-//import model.Infantry;
-import model.Vehicle;
+
+import CombatSimilator.model.Vehicle;
 
 public class VehicleCombatController {
 	private Random rand = new Random(); 

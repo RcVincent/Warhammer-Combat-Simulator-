@@ -1,4 +1,4 @@
-package controller;
+package CombatSimulator.controller;
 
 //import CombatController;
 //import 

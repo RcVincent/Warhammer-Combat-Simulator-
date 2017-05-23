@@ -1,13 +1,13 @@
-package controller;
+package CombatSimulator.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import DBpersist.DatabaseProvider;
-import DBpersist.DerbyDatabase;
-import DBpersist.IDatabase;
-import model.Armory;
-import model.Favorites;
-import model.User;
+import CombatSimilator.model.Armory;
+import CombatSimilator.model.Favorites;
+import CombatSimilator.model.User;
+import CombatSimulator.DBpersist.DatabaseProvider;
+import CombatSimulator.DBpersist.DerbyDatabase;
+import CombatSimulator.DBpersist.IDatabase;
 
 public class DBMethodsController {
 	private IDatabase db = null;
