@@ -6,13 +6,9 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
-	//private int userID;
 	private String Fname;
 	private String Lname;
 	private String type;
-	//private String accountType;
-	
-	//private Random rand;
 	private String isAdmin;
 	private String sessionid;
 	
@@ -21,8 +17,7 @@ public class User {
 	
 	
 	public User(){
-		//this.rand = new Random();
-		//setUserID(rand.nextInt(1000));
+		//empty constructor for now 
 	}
 
 	public String getUsername() {

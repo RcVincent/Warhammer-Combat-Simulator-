@@ -1,4 +1,4 @@
-package model;
+package CombatSimilator.model;
 
 public class Vehicle {
 	private int WS, BS, S, FR, SI, R, HP; 

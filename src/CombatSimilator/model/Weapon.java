@@ -1,4 +1,4 @@
-package model;
+package CombatSimilator.model;
 
 public class Weapon {
 	private int Strength;

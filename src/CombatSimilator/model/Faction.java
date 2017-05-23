@@ -1,4 +1,4 @@
-package model;
+package CombatSimilator.model;
 
 public class Faction {
 	private int faction_id, armory_id;

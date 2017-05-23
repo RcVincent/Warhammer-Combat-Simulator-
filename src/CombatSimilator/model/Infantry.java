@@ -1,4 +1,4 @@
-package model;
+package CombatSimilator.model;
 
 public class Infantry {
 	private int WS, BS, Strength, Toughness, Wounds, Initiaitve, Attacks, Leadership, Save;

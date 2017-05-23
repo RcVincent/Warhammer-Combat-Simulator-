@@ -1,4 +1,4 @@
-package model;
+package CombatSimilator.model;
 
 import java.awt.List;
 
