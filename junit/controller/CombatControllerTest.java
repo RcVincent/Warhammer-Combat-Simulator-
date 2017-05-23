@@ -5,8 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.Infantry;
-import model.Weapon;
+import CombatSimilator.model.Infantry;
+import CombatSimilator.model.Weapon;
+import CombatSimulator.controller.CombatController;
 
 public class CombatControllerTest {
 	CombatController c = new CombatController();

@@ -1,4 +1,4 @@
-package DBpersist;
+package CombatSimulator.DBpersist;
 
 public class DatabaseProvider {
 	private static IDatabase theInstance;

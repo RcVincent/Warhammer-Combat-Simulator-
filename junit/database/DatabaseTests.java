@@ -10,15 +10,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import DBpersist.DatabaseProvider;
-import DBpersist.DerbyDatabase;
-import DBpersist.IDatabase;
-import model.User;
-import model.Weapon;
-import model.Faction;
-import model.Favorites;
-import model.Search;
-import model.Armory;
+import CombatSimilator.model.Armory;
+import CombatSimilator.model.Faction;
+import CombatSimilator.model.Favorites;
+import CombatSimilator.model.Search;
+import CombatSimilator.model.User;
+import CombatSimilator.model.Weapon;
+import CombatSimulator.DBpersist.DatabaseProvider;
+import CombatSimulator.DBpersist.DerbyDatabase;
+import CombatSimulator.DBpersist.IDatabase;
 
 public class DatabaseTests {
 	
