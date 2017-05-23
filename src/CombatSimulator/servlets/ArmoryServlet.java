@@ -1,4 +1,4 @@
-package servlets;
+package CombatSimulator.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Armory;
-import model.User;
-import controller.DBMethodsController;
+import CombatSimilator.model.Armory;
+import CombatSimilator.model.User;
+import CombatSimulator.controller.DBMethodsController;
 public class ArmoryServlet {
 	private static final long serialVersionUID = 1L;
 	private DBMethodsController c = new DBMethodsController();

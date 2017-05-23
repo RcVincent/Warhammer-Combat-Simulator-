@@ -1,4 +1,4 @@
-package servlets;
+package CombatSimulator.servlets;
 
 import java.io.IOException;
 

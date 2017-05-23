@@ -1,4 +1,4 @@
-package servlets;
+package CombatSimulator.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Favorites;
-import controller.DBMethodsController;
+import CombatSimilator.model.Favorites;
+import CombatSimulator.controller.DBMethodsController;
 public class FavoritesServlet {
 	private static final long serialVersionUID = 1L;
 	private DBMethodsController dbc = new DBMethodsController();
