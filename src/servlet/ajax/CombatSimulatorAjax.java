@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.CombatController;
+import CombatSimulator.controller.CombatController;
 
 public class CombatSimulatorAjax {
 	private static final long serialVersionUID = 1L;
